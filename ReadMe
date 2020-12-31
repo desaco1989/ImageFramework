@@ -1,0 +1,25 @@
+glide加载https链接；   glide加载图片优先级；  glide加载网络图片成功与失败；
+glide设置圆角；  glide单例；  glide加载本地图；等
+
+** com.desaco.imageloader.image 包下可以切换glide、picasso
+** com.desaco.imageloader.single_glide 包下对glide的简单封装
+** com.desaco.imageloader.transformations 包下的一些滤镜、圆角图片等图片处理
+
+1. (框架思考--工具类设计)相机裁剪+glide、picasso自由切换模式设计-
+https://download.csdn.net/download/she_cool_/10853237
+
+2. (圆角 滤镜等)An Android transformation library providing a variety of image transformations for Glide-
+https://github.com/wasabeef/glide-transformations
+
+3. Glide封装个工具类直接使用- https://www.jianshu.com/p/92070f357068
+
+4. Android工具类系列-Glide图片缓存与圆角- https://my.oschina.net/u/3698786/blog/1591973
+
+5. Android 使用Glide实现圆形和圆角图片- https://cloud.tencent.com/developer/article/1591870
+
+6. Glide封装个工具类直接使用- https://blog.csdn.net/imshuyuan/article/details/67637643
+
+
+
+
+
