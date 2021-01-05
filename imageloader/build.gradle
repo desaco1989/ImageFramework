@@ -1,4 +1,5 @@
-apply plugin: 'com.android.application'
+//apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 30
@@ -6,7 +7,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.desaco.imageloader"
+//        applicationId "com.desaco.imageloader"
         minSdkVersion 14
         targetSdkVersion 30
         versionCode 1
