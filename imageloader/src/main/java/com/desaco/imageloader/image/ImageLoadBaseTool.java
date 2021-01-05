@@ -8,10 +8,7 @@ import androidx.annotation.DrawableRes;
 
 /**
  * 图片加载基础的工具类
- * Application
- * Created by anonyper on 2018/4/2.
  */
-
 public class ImageLoadBaseTool {
 
     private static final String TAG = "ImageTool";

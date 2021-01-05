@@ -2,12 +2,8 @@ package com.desaco.imageloader.image;
 
 /**
  * 图片加载过程的回调
- * Application
- * Created by anonyper on 2018/4/2.
  */
-
 public interface ImageLoadProcessInterface {
-
     /**
      * 开始加载
      */

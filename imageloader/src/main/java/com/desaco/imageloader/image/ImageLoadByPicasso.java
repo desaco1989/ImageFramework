@@ -25,14 +25,10 @@ import java.io.File;
 
 /**
  * 图片显示的公共类 使用picasso
- * Application
- * Created by anonyper on 2018/4/2.
  */
-
 public class ImageLoadByPicasso implements ImageLoadInterface {
 
     private static final String TAG = "PicassoUtils";
-
 
     /**
      * glide加载图片

@@ -6,10 +6,7 @@ import android.widget.ImageView;
 
 /**
  * 图片加载的接口
- * Application
- * Created by anonyper on 2018/4/2.
  */
-
 public interface ImageLoadInterface {
 
     /**

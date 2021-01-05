@@ -13,9 +13,6 @@ import com.desaco.imageloader.image.ImageLoadBaseTool;
 import com.desaco.imageloader.image.ImageLoadProcessInterface;
 import com.desaco.imageloader.utils.LogTagUtil;
 
-import java.io.File;
-
-
 public class MainActivity extends AppCompatActivity {
 
     View parent_view;
@@ -36,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         String path;
 //      path = "https://upload-images.jianshu.io/upload_images/5207488-9b7d8d755f83092b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp";
-        path = "https://t-static-shopping.cxzx10086.cn/img/shopping/%E7%BB%84%20233_1609316610960.png";
+        path = "https://t-static-shopping.cxzx10086.cn/img/shopping/封面图01_1601192723146.png";
 //        path = "https://www.baidu.com";
 
         showImage(imageView, path);
@@ -49,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
      */
     void showImage(ImageView imageView, String path) {
         ImageLoadBaseTool.display(this, imageView, path,
-                new ImageConfig(R.mipmap.ic_launcher, R.mipmap.ic_launcher_round, 25),
+                new ImageConfig(R.mipmap.ic_launcher, R.mipmap.ic_launcher_round, 20),
                 new ImageLoadProcessInterface() {
 
                     @Override

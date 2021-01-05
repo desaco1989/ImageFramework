@@ -22,10 +22,7 @@ import com.desaco.imageloader.utils.LogTagUtil;
 
 /**
  * 图片显示的公共类 使用glide
- * Application
- * Created by anonyper on 2018/4/2.
  */
-
 public class ImageLoadByGlide implements ImageLoadInterface {
 
     private static final String TAG = "GlideUtils";

@@ -3,10 +3,8 @@ package com.desaco.imageloader.image;
 import android.widget.ImageView;
 
 /**
- * Application
- * Created by anonyper on 2018/4/2.
+ *
  */
-
 public class ImageConfig {
     int defaultRes;//默认占位符
     int failRes;//失败占位符
