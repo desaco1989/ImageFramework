@@ -1,5 +1,5 @@
-package com.desaco.imageloader.single_glide;//package com.cmdc.tvshopping.libs.glide;
-//
+//package com.desaco.imageloader.single_glide;//package com.cmdc.tvshopping.libs.glide;
+////
 //import android.content.Context;
 //import android.graphics.drawable.Drawable;
 //import android.util.Log;
@@ -16,6 +16,7 @@ package com.desaco.imageloader.single_glide;//package com.cmdc.tvshopping.libs.g
 //import com.bumptech.glide.request.RequestOptions;
 //import com.bumptech.glide.request.target.Target;
 //import com.cmdc.tvshopping.R;
+//import com.desaco.imageloader.transformations.RoundedCornersTransformation;
 //
 //import java.io.File;
 //
@@ -140,17 +141,17 @@ package com.desaco.imageloader.single_glide;//package com.cmdc.tvshopping.libs.g
 //     * @param imageView
 //     * @param type
 //     */
-////    public static void loadCustRoundCircleImage(Context context, String url, ImageView imageView, RoundedCornersTransformation.CornerType type) {
-////        RequestOptions options = new RequestOptions()
-////                .centerCrop()
-////                .placeholder(placeholderSoWhite)
-////                .error(errorSoWhite)
-////                //.priority(Priority.HIGH)
-////                .bitmapTransform(new RoundedCornersTransformation(45, 0, type))
-////                .diskCacheStrategy(DiskCacheStrategy.ALL);
-////
-////        Glide.with(context).load(url).apply(options).into(imageView);
-////    }
+//    public static void loadCustRoundCircleImage(Context context, String url, ImageView imageView, RoundedCornersTransformation.CornerType type) {
+//        RequestOptions options = new RequestOptions()
+//                .centerCrop()
+//                .placeholder(placeholderSoWhite)
+//                .error(errorSoWhite)
+//                //.priority(Priority.HIGH)
+//                .bitmapTransform(new RoundedCornersTransformation(45, 0, type))
+//                .diskCacheStrategy(DiskCacheStrategy.ALL);
+//
+//        Glide.with(context).load(url).apply(options).into(imageView);
+//    }
 //
 //
 //    /**

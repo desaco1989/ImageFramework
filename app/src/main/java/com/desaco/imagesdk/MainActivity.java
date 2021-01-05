@@ -33,8 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
         String path;
 //      path = "https://upload-images.jianshu.io/upload_images/5207488-9b7d8d755f83092b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp";
-        path = "https://t-static-shopping.cxzx10086.cn/img/shopping/封面图01_1601192723146.png";
+//        path = "https://t-static-shopping.cxzx10086.cn/img/shopping/封面图01_1601192723146.png";
 //        path = "https://www.baidu.com";
+        path = "https://t-static-shopping.cxzx10086.cn/img/shopping/index_del_list3_1607481816933.png";
 
         showImage(imageView, path);
     }
@@ -45,8 +46,18 @@ public class MainActivity extends AppCompatActivity {
      * @param path
      */
     void showImage(ImageView imageView, String path) {
+        ImageConfig config = new ImageConfig();
+        config.setDefaultRes(R.mipmap.p2);
+        config.setFailRes(R.mipmap.p2);
+//        config.setHeight(600);
+//        config.setWidth(600);
+//        config.setDisplayWidth(1200);
+//        config.setDisplayHeight(1200);
+        config.setRadius(20);
+        config.setScaleType(ImageView.ScaleType.FIT_CENTER);
+
         ImageLoadBaseTool.display(this, imageView, path,
-                new ImageConfig(R.mipmap.ic_launcher, R.mipmap.ic_launcher_round, 20),
+                config, // new ImageConfig(R.mipmap.p2, R.mipmap.p2, 20)
                 new ImageLoadProcessInterface() {
 
                     @Override

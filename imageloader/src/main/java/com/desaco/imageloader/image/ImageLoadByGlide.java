@@ -33,7 +33,9 @@ public class ImageLoadByGlide implements ImageLoadInterface {
      * @param imageView view
      * @param url       url
      */
-    public void display(Context mContext, final ImageView imageView, final String url, final ImageConfig config, final ImageLoadProcessInterface imageLoadProcessInterface) {
+    public void display(Context mContext, final ImageView imageView, final String url,
+                        final ImageConfig config,
+                        final ImageLoadProcessInterface imageLoadProcessInterface) {
 
         if (mContext == null) {
             LogTagUtil.e("GlideUtils", "GlideUtils -> display -> mContext is null");
@@ -47,7 +49,7 @@ public class ImageLoadByGlide implements ImageLoadInterface {
         Context context = imageView.getContext();
         // View你还活着吗？
         if (context instanceof Activity) {
-            if (((Activity) context).isFinishing()) {//activity是否结束
+            if (((Activity) context).isFinishing()) { // activity是否结束
                 return;
             }
         }
@@ -129,6 +131,8 @@ public class ImageLoadByGlide implements ImageLoadInterface {
                     }
                 }
             };
+            // .override(width, height) TODO
+
             if (simpleTarget != null) {
                 Glide.with(context).asBitmap().load(url).apply(requestOptions).into(simpleTarget);
             } else {

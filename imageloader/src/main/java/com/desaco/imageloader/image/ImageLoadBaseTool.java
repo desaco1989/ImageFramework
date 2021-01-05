@@ -16,7 +16,7 @@ public class ImageLoadBaseTool {
 
     static {
         imageLoad = new ImageLoadByGlide(); // glide
-        imageLoad = new ImageLoadByPicasso(); // picasso
+//        imageLoad = new ImageLoadByPicasso(); // picasso
     }
 
     /**
@@ -61,7 +61,8 @@ public class ImageLoadBaseTool {
      * @param url
      * @param imageLoadProcessInterface
      */
-    public static void display(Context mContext, ImageView view, String url, ImageLoadProcessInterface imageLoadProcessInterface) {
+    public static void display(Context mContext, ImageView view, String url,
+                               ImageLoadProcessInterface imageLoadProcessInterface) {
         display(mContext, view, url, -1, imageLoadProcessInterface);
     }
 
@@ -72,11 +73,13 @@ public class ImageLoadBaseTool {
      * @param defaultImage              默认图片
      * @param imageLoadProcessInterface 监听
      */
-    public static void display(Context mContext, ImageView view, String url, int defaultImage, ImageLoadProcessInterface imageLoadProcessInterface) {
+    public static void display(Context mContext, ImageView view, String url, int defaultImage,
+                               ImageLoadProcessInterface imageLoadProcessInterface) {
         display(mContext, view, url, defaultImage, -1, imageLoadProcessInterface);
     }
 
-    public static void display(Context mContext, ImageView view, String url, int defaultImage, int failImage, ImageLoadProcessInterface imageLoadProcessInterface) {
+    public static void display(Context mContext, ImageView view, String url, int defaultImage, int failImage,
+                               ImageLoadProcessInterface imageLoadProcessInterface) {
         display(mContext, view, url, new ImageConfig(defaultImage, failImage, 0), imageLoadProcessInterface);
     }
 
@@ -84,7 +87,9 @@ public class ImageLoadBaseTool {
         display(mContext, view, url, config, null);
     }
 
-    public static void display(Context mContext, ImageView view, String url, ImageConfig config, ImageLoadProcessInterface imageLoadProcessInterface) {
+    public static void display(Context mContext, ImageView view, String url,
+                               ImageConfig config,
+                               ImageLoadProcessInterface imageLoadProcessInterface) {
         displayUrl(mContext, view, url, config, imageLoadProcessInterface);
     }
 
@@ -95,7 +100,9 @@ public class ImageLoadBaseTool {
      * @param imageView view
      * @param url       url
      */
-    private static void displayUrl(Context mContext, final ImageView imageView, final String url, final ImageConfig config, final ImageLoadProcessInterface imageLoadProcessInterface) {
+    private static void displayUrl(Context mContext, final ImageView imageView, final String url,
+                                   final ImageConfig config,
+                                   final ImageLoadProcessInterface imageLoadProcessInterface) {
         try {
             imageLoad.display(mContext, imageView, url, config, imageLoadProcessInterface);
         } catch (Exception e) {

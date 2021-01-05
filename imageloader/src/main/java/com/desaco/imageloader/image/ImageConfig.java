@@ -3,15 +3,34 @@ package com.desaco.imageloader.image;
 import android.widget.ImageView;
 
 /**
- *
+ * 参数部分可以通过set get获取。
  */
 public class ImageConfig {
-    int defaultRes;//默认占位符
-    int failRes;//失败占位符
+    int defaultRes;// 默认占位符
+    int failRes;// 失败占位符
     int radius;// 圆角
-    ImageView.ScaleType scaleType;//图片展示样式
-    int width = -1;//图片宽
-    int height = -1;//图片高
+    ImageView.ScaleType scaleType;// 图片展示样式
+    int width = -1;// 图片宽
+    int height = -1;// 图片高
+
+    int displayWidth; // 显示在控件上的图片的宽
+    int displayHeight; // 显示在控件上的图片的高
+
+    public int getDisplayWidth() {
+        return displayWidth;
+    }
+
+    public void setDisplayWidth(int displayWidth) {
+        this.displayWidth = displayWidth;
+    }
+
+    public int getDisplayHeight() {
+        return displayHeight;
+    }
+
+    public void setDisplayHeight(int displayHeight) {
+        this.displayHeight = displayHeight;
+    }
 
     /**
      * 构造函数
