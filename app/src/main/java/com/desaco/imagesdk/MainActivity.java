@@ -1,5 +1,7 @@
 package com.desaco.imagesdk;
 
+import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -38,7 +40,39 @@ public class MainActivity extends AppCompatActivity {
         path = "https://t-static-shopping.cxzx10086.cn/img/shopping/index_del_list3_1607481816933.png";
 
         showImage(imageView, path);
+
+        LogTagUtil.e("desaco", "平板返回 True，手机返回 False , isTablet= " + isTablet(this));
+
+//        tryCatch();
     }
+
+    public void tryCatch() {
+        System.out.println("try block");
+        System.exit(0);
+
+        try {
+            LogTagUtil.e("desaco", "try");
+            int a = 3 / 0;
+            return;
+        } catch (Exception ex) {
+            LogTagUtil.e("desaco", "catch");
+            return;
+        } finally {
+            LogTagUtil.e("deaco", "finally");
+        }
+    }
+
+    /**
+     * 判断当前设备是手机还是平板，代码来自 Google I/O App for Android
+     *
+     * @param context
+     * @return 平板返回 True，手机返回 False
+     */
+    public static boolean isTablet(Context context) {
+        return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK)
+                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+    }
+
 
     /**
      * 展示图片
