@@ -11,12 +11,35 @@ import androidx.annotation.DrawableRes;
  */
 public class ImageLoadBaseTool {
 
-    private static final String TAG = "ImageTool";
+    private static final String TAG = "ImageLoadBaseTool";
     private static ImageLoadInterface imageLoad = null;
 
-    static {
-        imageLoad = new ImageLoadByGlide(); // glide
-//        imageLoad = new ImageLoadByPicasso(); // picasso
+    private static ImageLoadBaseTool mImageLoadBaseTool;
+
+    private ImageLoadBaseTool() {
+    }
+
+    private ImageLoadBaseTool(boolean isNeedGlide) { // TODO 在这里切换 glide 或 picasso
+        if (isNeedGlide) {
+            if (imageLoad == null) {
+                imageLoad = new ImageLoadByGlide(); // glide
+            }
+        } else {
+            if (imageLoad == null) {
+                imageLoad = new ImageLoadByPicasso(); // picasso
+            }
+        }
+    }
+
+    public static ImageLoadBaseTool getInstance(boolean isNeedGlide) {
+        if (mImageLoadBaseTool == null) {
+            synchronized (ImageLoadBaseTool.class) {
+                if (mImageLoadBaseTool == null) {
+                    mImageLoadBaseTool = new ImageLoadBaseTool(isNeedGlide);
+                }
+            }
+        }
+        return mImageLoadBaseTool;
     }
 
     /**
@@ -26,10 +49,9 @@ public class ImageLoadBaseTool {
      * @param view
      * @param resId
      */
-    public static void display(Context mContext, final ImageView view, @DrawableRes int resId) {
+    public void display(Context mContext, final ImageView view, @DrawableRes int resId) {
         display(mContext, view, null, resId);
     }
-
 
     /**
      * 加载网络图片/本地图片
@@ -38,7 +60,7 @@ public class ImageLoadBaseTool {
      * @param view
      * @param url
      */
-    public static void display(Context mContext, ImageView view, String url) {
+    public void display(Context mContext, ImageView view, String url) {
         display(mContext, view, url, -1);
     }
 
@@ -50,10 +72,9 @@ public class ImageLoadBaseTool {
      * @param url          图片地址
      * @param defaultImage 默认显示内容
      */
-    public static void display(Context mContext, ImageView view, String url, int defaultImage) {
+    public void display(Context mContext, ImageView view, String url, int defaultImage) {
         display(mContext, view, url, defaultImage, null);
     }
-
 
     /**
      * @param mContext
@@ -61,8 +82,8 @@ public class ImageLoadBaseTool {
      * @param url
      * @param imageLoadProcessInterface
      */
-    public static void display(Context mContext, ImageView view, String url,
-                               ImageLoadProcessInterface imageLoadProcessInterface) {
+    public void display(Context mContext, ImageView view, String url,
+                        ImageLoadProcessInterface imageLoadProcessInterface) {
         display(mContext, view, url, -1, imageLoadProcessInterface);
     }
 
@@ -73,26 +94,25 @@ public class ImageLoadBaseTool {
      * @param defaultImage              默认图片
      * @param imageLoadProcessInterface 监听
      */
-    public static void display(Context mContext, ImageView view, String url, int defaultImage,
-                               ImageLoadProcessInterface imageLoadProcessInterface) {
+    public void display(Context mContext, ImageView view, String url, int defaultImage,
+                        ImageLoadProcessInterface imageLoadProcessInterface) {
         display(mContext, view, url, defaultImage, -1, imageLoadProcessInterface);
     }
 
-    public static void display(Context mContext, ImageView view, String url, int defaultImage, int failImage,
-                               ImageLoadProcessInterface imageLoadProcessInterface) {
+    public void display(Context mContext, ImageView view, String url, int defaultImage, int failImage,
+                        ImageLoadProcessInterface imageLoadProcessInterface) {
         display(mContext, view, url, new ImageConfig(defaultImage, failImage, 0), imageLoadProcessInterface);
     }
 
-    public static void display(Context mContext, ImageView view, String url, ImageConfig config) {
+    public void display(Context mContext, ImageView view, String url, ImageConfig config) {
         display(mContext, view, url, config, null);
     }
 
-    public static void display(Context mContext, ImageView view, String url,
-                               ImageConfig config,
-                               ImageLoadProcessInterface imageLoadProcessInterface) {
+    public void display(Context mContext, ImageView view, String url,
+                        ImageConfig config,
+                        ImageLoadProcessInterface imageLoadProcessInterface) {
         displayUrl(mContext, view, url, config, imageLoadProcessInterface);
     }
-
 
     /**
      * glide加载图片
@@ -100,9 +120,9 @@ public class ImageLoadBaseTool {
      * @param imageView view
      * @param url       url
      */
-    private static void displayUrl(Context mContext, final ImageView imageView, final String url,
-                                   final ImageConfig config,
-                                   final ImageLoadProcessInterface imageLoadProcessInterface) {
+    private void displayUrl(Context mContext, final ImageView imageView, final String url,
+                            final ImageConfig config,
+                            final ImageLoadProcessInterface imageLoadProcessInterface) {
         try {
             imageLoad.display(mContext, imageView, url, config, imageLoadProcessInterface);
         } catch (Exception e) {
@@ -110,13 +130,12 @@ public class ImageLoadBaseTool {
         }
     }
 
-
     /**
      * 恢复加载图片
      *
      * @param context
      */
-    public static void resumeLoad(Context context, String url) {
+    public void resumeLoad(Context context, String url) {
         if (imageLoad != null) {
             imageLoad.resumeLoad(context, url);
         }
@@ -127,7 +146,7 @@ public class ImageLoadBaseTool {
      *
      * @param context
      */
-    public static void clearImageView(Context context, ImageView imageView, String url) {
+    public void clearImageView(Context context, ImageView imageView, String url) {
         if (imageLoad != null) {
             imageLoad.clearImageView(context, imageView, url);
         }
@@ -138,11 +157,9 @@ public class ImageLoadBaseTool {
      *
      * @param context
      */
-    public static void pauseLoad(Context context, String url) {
+    public void pauseLoad(Context context, String url) {
         if (imageLoad != null) {
             imageLoad.pauseLoad(context, url);
         }
     }
-
-
 }

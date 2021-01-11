@@ -14,7 +14,7 @@
         android:layout_gravity="center"
         android:text="Hello World!" />
 
-    <!--app:srcCompat="@mipmap/ic_launcher"-->
+
     <ImageView
         android:id="@+id/pic_iv"
         android:layout_width="300px"

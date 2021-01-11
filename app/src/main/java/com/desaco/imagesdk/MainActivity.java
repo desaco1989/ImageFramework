@@ -17,19 +17,14 @@ import com.desaco.imageloader.utils.LogTagUtil;
 
 public class MainActivity extends AppCompatActivity {
 
-    View parent_view;
-    TextView text;
-    Button button;
-    ImageView imageView;
+    private ImageView mImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        parent_view = this.findViewById(R.id.parent_view);
-//        text = this.findViewById(R.id.text);
-//        button = this.findViewById(R.id.button);
-        imageView = findViewById(R.id.pic_iv);
+//
+        mImageView = findViewById(R.id.pic_iv);
 
 //        button.setOnClickListener(view -> initSelectPictureManager());//这是lambda的使用方式
 
@@ -39,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 //        path = "https://www.baidu.com";
         path = "https://t-static-shopping.cxzx10086.cn/img/shopping/index_del_list3_1607481816933.png";
 
-        showImage(imageView, path);
+        showImage(mImageView, path);
 
         LogTagUtil.e("desaco", "平板返回 True，手机返回 False , isTablet= " + isTablet(this));
 
@@ -79,18 +74,16 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param path
      */
-    void showImage(ImageView imageView, String path) {
+    private void showImage(ImageView imageView, String path) {
         ImageConfig config = new ImageConfig();
         config.setDefaultRes(R.mipmap.p2);
         config.setFailRes(R.mipmap.p2);
-//        config.setHeight(600);
-//        config.setWidth(600);
-//        config.setDisplayWidth(1200);
-//        config.setDisplayHeight(1200);
-        config.setRadius(20);
-        config.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        config.setRadius(40);
+        config.setScaleType(ImageView.ScaleType.CENTER_CROP);
+//        config.setWidth(100);
+//        config.setHeight(100);
 
-        ImageLoadBaseTool.display(this, imageView, path,
+        ImageLoadBaseTool.getInstance(false).display(this, imageView, path,
                 config, // new ImageConfig(R.mipmap.p2, R.mipmap.p2, 20)
                 new ImageLoadProcessInterface() {
 

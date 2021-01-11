@@ -11,12 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.ImageViewTarget;
 import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.transition.Transition;
+import com.desaco.imageloader.transformations.GlideRoundTransform;
 import com.desaco.imageloader.utils.LogTagUtil;
 
 
@@ -25,7 +25,7 @@ import com.desaco.imageloader.utils.LogTagUtil;
  */
 public class ImageLoadByGlide implements ImageLoadInterface {
 
-    private static final String TAG = "GlideUtils";
+    private static final String TAG = "ImageLoadByGlide";
 
     /**
      * glide加载图片
@@ -36,14 +36,14 @@ public class ImageLoadByGlide implements ImageLoadInterface {
     public void display(Context mContext, final ImageView imageView, final String url,
                         final ImageConfig config,
                         final ImageLoadProcessInterface imageLoadProcessInterface) {
-
+        LogTagUtil.e(TAG, "GlideUtils -> display()");
         if (mContext == null) {
-            LogTagUtil.e("GlideUtils", "GlideUtils -> display -> mContext is null");
+            LogTagUtil.e(TAG, "GlideUtils -> display -> mContext is null");
             return;
         }
         // 不能崩
         if (imageView == null) {
-            LogTagUtil.e("GlideUtils", "GlideUtils -> display -> imageView is null");
+            LogTagUtil.e(TAG, "GlideUtils -> display -> imageView is null");
             return;
         }
         Context context = imageView.getContext();
@@ -55,7 +55,7 @@ public class ImageLoadByGlide implements ImageLoadInterface {
         }
         try {
             if ((config == null || config.defaultRes <= 0) && TextUtils.isEmpty(url)) {
-                LogTagUtil.e("GlideUtils", "GlideUtils -> display -> url is null and config is null");
+                LogTagUtil.e(TAG, "GlideUtils -> display -> url is null and config is null");
                 return;
             }
             RequestOptions requestOptions = new RequestOptions();
@@ -82,14 +82,15 @@ public class ImageLoadByGlide implements ImageLoadInterface {
                     requestOptions.fitCenter();
                 }
                 if (config.radius > 0) {
-                    requestOptions.transform(new RoundedCorners(config.radius));
+//                    requestOptions.transform(new RoundedCorners(config.radius)); // TODO
+                    requestOptions.transform(new GlideRoundTransform(mContext, config.radius));
                 }
             }
             ImageViewTarget simpleTarget = new BitmapImageViewTarget(imageView) {
                 @Override
                 public void onLoadStarted(Drawable placeholder) {
                     super.onLoadStarted(placeholder);
-                    LogTagUtil.i("image", "onLoadStarted");
+                    LogTagUtil.i(TAG, "onLoadStarted");
                     if (imageLoadProcessInterface != null) {
                         imageLoadProcessInterface.onLoadStarted();
                     }
@@ -98,7 +99,7 @@ public class ImageLoadByGlide implements ImageLoadInterface {
                 @Override
                 public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                     super.onResourceReady(resource, transition);
-                    LogTagUtil.i("image", "onResourceReady");
+                    LogTagUtil.i(TAG, "onResourceReady");
                     if (imageLoadProcessInterface != null) {
                         imageLoadProcessInterface.onResourceReady();
                     }
@@ -107,7 +108,7 @@ public class ImageLoadByGlide implements ImageLoadInterface {
                 @Override
                 public void onLoadFailed(@Nullable Drawable errorDrawable) {
                     super.onLoadFailed(errorDrawable);
-                    LogTagUtil.i("image", "onLoadFailed");
+                    LogTagUtil.i(TAG, "onLoadFailed");
                     if (imageLoadProcessInterface != null) {
                         imageLoadProcessInterface.onLoadFailed();
                     }
@@ -116,7 +117,7 @@ public class ImageLoadByGlide implements ImageLoadInterface {
                 @Override
                 public void onLoadCleared(Drawable placeholder) {
                     super.onLoadCleared(placeholder);
-                    LogTagUtil.i("image", "onLoadCleared");
+                    LogTagUtil.i(TAG, "onLoadCleared");
                     if (imageLoadProcessInterface != null) {
                         imageLoadProcessInterface.onLoadCleared();
                     }
@@ -131,7 +132,7 @@ public class ImageLoadByGlide implements ImageLoadInterface {
                     }
                 }
             };
-            // .override(width, height) TODO
+            // .override(width, height)
 
             if (simpleTarget != null) {
                 Glide.with(context).asBitmap().load(url).apply(requestOptions).into(simpleTarget);

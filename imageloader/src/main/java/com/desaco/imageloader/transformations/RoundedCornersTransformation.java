@@ -30,6 +30,9 @@ import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 
 import java.security.MessageDigest;
 
+/**
+ * 圆角
+ */
 public class RoundedCornersTransformation extends BitmapTransformation {
 
   private static final int VERSION = 1;

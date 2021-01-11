@@ -1,4 +1,4 @@
-package com.desaco.imageloader.utils;
+package com.desaco.imageloader.single_glide;
 
 import android.content.Context;
 import android.os.Looper;
