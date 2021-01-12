@@ -19,18 +19,24 @@ public class ImageLoadBaseTool {
     private static ImageLoadBaseTool mImageLoadBaseTool;
 
     private ImageLoadBaseTool() {
+
     }
 
     private ImageLoadBaseTool(boolean isNeedGlide) { // TODO 在这里切换 glide 或 picasso
-        if (isNeedGlide) {
-            if (imageLoad == null) {
-                imageLoad = new ImageLoadByGlide(); // glide
-            }
-        } else {
-            if (imageLoad == null) {
-                imageLoad = new ImageLoadByPicasso(); // picasso
-            }
+        if (imageLoad == null) {
+            imageLoad = new ImageLoadByGlide(); // 目前只使用glide加载图片；picasso暂无需求
         }
+
+//        if (isNeedGlide) {
+//            if (imageLoad == null) {
+//                imageLoad = new ImageLoadByGlide(); // glide
+//            }
+//        } else {
+//            if (imageLoad == null) {
+//                imageLoad = new ImageLoadByPicasso(); // picasso
+//            }
+//        }
+
     }
 
     public static ImageLoadBaseTool getInstance(boolean isNeedGlide) {

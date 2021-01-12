@@ -31,9 +31,3 @@ Picasso.get().load(url)
                 .centerCrop()  // 或者调用
                 .transform(new PicassoCircleCornerForm(15))
                 .into(imageView);
-
-
-
-
-
-

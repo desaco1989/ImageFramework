@@ -19,8 +19,8 @@ public class PicassoCircleCornerForm implements Transformation {
 
     public int mImageCorner = 10;
 
-    public PicassoCircleCornerForm(int corner) {
-        mImageCorner = corner;
+    public PicassoCircleCornerForm(int cornerPx) {
+        mImageCorner = cornerPx;
     }
 
     @Override
@@ -35,8 +35,6 @@ public class PicassoCircleCornerForm implements Transformation {
         paintColor.setFlags(Paint.ANTI_ALIAS_FLAG);
 
         RectF rectF = new RectF(new Rect(0, 0, widthLight, heightLight));
-
-//        canvas.drawRoundRect(rectF, widthLight / 20, heightLight / 20, paintColor);
         canvas.drawRoundRect(rectF, mImageCorner, mImageCorner, paintColor);
 
         Paint paintImage = new Paint();
@@ -50,4 +48,5 @@ public class PicassoCircleCornerForm implements Transformation {
     public String key() {
         return "roundcorner";
     }
+
 }
