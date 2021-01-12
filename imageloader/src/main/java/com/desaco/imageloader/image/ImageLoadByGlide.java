@@ -16,7 +16,7 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.ImageViewTarget;
 import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.transition.Transition;
-import com.desaco.imageloader.transformations.GlideRoundTransform;
+import com.desaco.imageloader.image.transform.GlideRoundTransform;
 import com.desaco.imageloader.utils.LogTagUtil;
 
 

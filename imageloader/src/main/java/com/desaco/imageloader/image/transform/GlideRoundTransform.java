@@ -1,4 +1,4 @@
-package com.desaco.imageloader.transformations;
+package com.desaco.imageloader.image.transform;
 
 import android.content.Context;
 import android.content.res.Resources;
