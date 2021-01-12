@@ -2,12 +2,6 @@ package com.desaco.imageloader.image;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Build;
 import android.text.TextUtils;
@@ -15,21 +9,29 @@ import android.widget.ImageView;
 
 import androidx.core.content.FileProvider;
 
-import com.desaco.imageloader.transformations.PicassoTransformation;
+import com.desaco.imageloader.transformations.PicassoCircleCornerForm;
 import com.desaco.imageloader.utils.LogTagUtil;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
-import com.squareup.picasso.Transformation;
 
 import java.io.File;
 
 /**
- * 图片显示的公共类 使用picasso
+ * 图片显示的公共类,使用picasso
  */
 public class ImageLoadByPicasso implements ImageLoadInterface {
 
     private static final String TAG = "ImageLoadByPicasso";
+
+    private void baseDisplay(String url, ImageView imageView) { // 设置显示大小和圆角
+        Picasso.get()
+                .load(url)
+                .resize(300, 300)
+                .centerCrop()  // 或者调用
+                .transform(new PicassoCircleCornerForm(15))
+                .into(imageView);
+    }
 
     /**
      * glide加载图片
@@ -40,6 +42,7 @@ public class ImageLoadByPicasso implements ImageLoadInterface {
     public void display(Context mContext, final ImageView imageView, String url,
                         final ImageConfig config,
                         final ImageLoadProcessInterface imageLoadProcessInterface) {
+
         LogTagUtil.e(TAG, "PicassoUtils -> display()");
 
         if (mContext == null) {
@@ -65,7 +68,7 @@ public class ImageLoadByPicasso implements ImageLoadInterface {
             }
             RequestCreator requestCreator = null;
             Uri loadUri = null;
-            if (url.startsWith("http")) {
+            if (url.startsWith("http") || url.startsWith("https")) {
                 // 网络图片
                 loadUri = Uri.parse(url);
             } else {
@@ -77,6 +80,7 @@ public class ImageLoadByPicasso implements ImageLoadInterface {
                         url = Uri.parse(url).getPath();
                     }
                 }
+
                 File file = new File(url);
                 if (file != null && file.exists()) {
                     // 本地文件
@@ -103,31 +107,17 @@ public class ImageLoadByPicasso implements ImageLoadInterface {
                 if (config.width > 0 && config.height > 0) {
                     requestCreator.resize(config.width, config.height);
                 }
-                if (config.radius > 0) {
 
-//                    requestCreator.transform(new Transformation() {
-//                        @Override
-//                        public Bitmap transform(Bitmap source) {
-//                            final Paint paint = new Paint();
-//                            paint.setAntiAlias(true);
-//                            Bitmap target = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
-//                            Canvas canvas = new Canvas(target);
-//                            RectF rect = new RectF(0, 0, source.getWidth(), source.getHeight());
-//                            canvas.drawRoundRect(rect, config.radius, config.radius, paint);
-//                            paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-//                            canvas.drawBitmap(source, 0, 0, paint);
-//                            source.recycle();
-//                            return target;
-//                        }
-//
-//                        @Override
-//                        public String key() {
-//                            return "radius-transform";
-//                        }
-//                    });
+                if (config.getScaleType() != null) { // 设置图片ScaleType
+                    if (config.getScaleType().equals(ImageView.ScaleType.CENTER_CROP)) {
+                        requestCreator.centerCrop();
+                    } else if (config.getScaleType().equals(ImageView.ScaleType.CENTER_INSIDE)) {
+                        requestCreator.centerInside();
+                    }
+                }
 
-                    requestCreator.transform(new PicassoTransformation(imageView));
-
+                if (config.radius > 0) { // 设置圆角
+                    requestCreator.transform(new PicassoCircleCornerForm(config.radius));
                 }
             }
 
@@ -137,6 +127,7 @@ public class ImageLoadByPicasso implements ImageLoadInterface {
                     public void onSuccess() {
                         if (imageLoadProcessInterface != null) {
                             imageLoadProcessInterface.onResourceReady();
+                            LogTagUtil.e(TAG, "Callback onSuccess");
                         }
                     }
 
@@ -144,6 +135,7 @@ public class ImageLoadByPicasso implements ImageLoadInterface {
                     public void onError(Exception e) {
                         if (imageLoadProcessInterface != null) {
                             imageLoadProcessInterface.onLoadFailed();
+                            LogTagUtil.e(TAG, "Callback onError");
                         }
                     }
                 });
@@ -154,6 +146,7 @@ public class ImageLoadByPicasso implements ImageLoadInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     /**

@@ -5,6 +5,8 @@ import android.widget.ImageView;
 
 import androidx.annotation.DrawableRes;
 
+import com.desaco.imageloader.utils.LogTagUtil;
+
 
 /**
  * 图片加载基础的工具类
@@ -40,6 +42,12 @@ public class ImageLoadBaseTool {
             }
         }
         return mImageLoadBaseTool;
+    }
+
+    public static void setPrintLog(boolean isPrintLog) {
+        if (isPrintLog) {
+            LogTagUtil.isCommonLog = true;
+        }
     }
 
     /**

@@ -38,7 +38,51 @@ public class MainActivity extends AppCompatActivity {
 
         LogTagUtil.e("desaco", "平板返回 True，手机返回 False , isTablet= " + isTablet(this));
 
+
 //        tryCatch();
+
+    }
+
+    /**
+     * 展示图片
+     *
+     * @param path
+     */
+    private void showImage(ImageView imageView, String path) {
+        ImageLoadBaseTool.setPrintLog(true); // 打印日志
+
+        ImageConfig config = new ImageConfig();
+        config.setDefaultRes(R.mipmap.p2);
+        config.setFailRes(R.mipmap.p2);
+        config.setRadius(15);
+        config.setScaleType(ImageView.ScaleType.CENTER_CROP); // CENTER_CROP
+        config.setWidth(300);
+        config.setHeight(300);
+
+        ImageLoadBaseTool.getInstance(false).display(this, imageView, path,
+                config, // new ImageConfig(R.mipmap.p2, R.mipmap.p2, 20)
+                new ImageLoadProcessInterface() {
+
+                    @Override
+                    public void onLoadStarted() {
+                        LogTagUtil.e("desaco", "onLoadStarted");
+                    }
+
+                    @Override
+                    public void onResourceReady() {
+                        LogTagUtil.e("desaco", "onResourceReady");
+                    }
+
+                    @Override
+                    public void onLoadCleared() {
+                        LogTagUtil.e("desaco", "onLoadCleared");
+                    }
+
+                    @Override
+                    public void onLoadFailed() {
+                        LogTagUtil.e("desaco", "onLoadFailed");
+                    }
+                });
     }
 
     public void tryCatch() {
@@ -68,44 +112,4 @@ public class MainActivity extends AppCompatActivity {
                 >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
-
-    /**
-     * 展示图片
-     *
-     * @param path
-     */
-    private void showImage(ImageView imageView, String path) {
-        ImageConfig config = new ImageConfig();
-        config.setDefaultRes(R.mipmap.p2);
-        config.setFailRes(R.mipmap.p2);
-        config.setRadius(40);
-        config.setScaleType(ImageView.ScaleType.CENTER_CROP);
-//        config.setWidth(100);
-//        config.setHeight(100);
-
-        ImageLoadBaseTool.getInstance(false).display(this, imageView, path,
-                config, // new ImageConfig(R.mipmap.p2, R.mipmap.p2, 20)
-                new ImageLoadProcessInterface() {
-
-                    @Override
-                    public void onLoadStarted() {
-                        LogTagUtil.e("desaco", "onLoadStarted");
-                    }
-
-                    @Override
-                    public void onResourceReady() {
-                        LogTagUtil.e("desaco", "onResourceReady");
-                    }
-
-                    @Override
-                    public void onLoadCleared() {
-                        LogTagUtil.e("desaco", "onLoadCleared");
-                    }
-
-                    @Override
-                    public void onLoadFailed() {
-                        LogTagUtil.e("desaco", "onLoadFailed");
-                    }
-                });
-    }
 }

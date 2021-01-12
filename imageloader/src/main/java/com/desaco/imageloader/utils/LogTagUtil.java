@@ -8,7 +8,7 @@ import android.util.Log;
  */
 public class LogTagUtil {
 
-    private static boolean isCommonLog = true; // 可以关闭或不可关闭的日志
+    public static boolean isCommonLog = false; // 可以关闭或不可关闭的日志
     private static boolean isDebugLog = true; // 上线需要关闭的日志，测试为true， 上线为false
 
     private static void printLog(final String logType, final String tag, final String msg) {
